@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+      layout:decorate="~{admin/layout-admin.html}">
+<section class="row" layout:fragment="content">
+    <div class="col-6 offset-3 mt-4">
+        <form th:action="@{/admin/categories/saveOrUpdate}" method="POST" th:object="${category}">
+            <div class="card">
+                <div class="card-header">
+                    <h2 th:text="${category.isEdit? 'Edit Category': 'Add New Category'}"></h2> [cite: 773]
+                </div>
+                <div class="card-body">
+                    <input type="hidden" th:field="*{isEdit}"> [cite: 778]
+                    <div class="mb-3" th:if="${category.isEdit}">
+                        <label for="categoryId" class="form-label">Category ID:</label>
+                        <input type="text" readonly="readonly" class="form-control" th:field="*{categoryId}" id="categoryId"> [cite: 777, 780]
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Category Name:</label>
+                        <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Category Name"> [cite: 785, 787]
+                        <div th:if="${#fields.hasErrors('name')}" class="form-text text-danger">Category Name is required!</div> [cite: 788]
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+</html>
